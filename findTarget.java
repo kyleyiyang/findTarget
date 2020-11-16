@@ -97,3 +97,33 @@ class Solution {
         return null;
     }
 }
+************************************************************************
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        
+        return traversal(root,k,root);
+    }
+    public static TreeNode search(TreeNode root, int i) {
+        if (root!=null) {
+            //System.out.println(root.val+"; i="+i);
+            if (root.val==i) return root;
+            if (root.val>i) return search(root.left,i);
+            if (root.val<i) return search(root.right,i);
+        }
+        return null;
+    }
+    public static boolean traversal(TreeNode node, int k, TreeNode root) {
+        if (node!=null) {
+            
+            traversal(node.left,k,root);
+            traversal(node.right,k,root);
+            TreeNode temp=search(root,(k-node.val));
+            if (temp!=null) {
+                System.out.println(temp.val+"; k-node.val="+(k-node.val));
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
